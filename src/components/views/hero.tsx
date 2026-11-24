@@ -45,7 +45,7 @@ export function Hero() {
             className="mx-auto mt-5 max-w-xl text-base text-white/85 md:mx-0 md:text-lg"
           >
             Koleksi tanaman pilihan, bibit tanaman buah, tanaman hias, tabulampot, benih
-            varietas IPB, media tanam, dan peralatan berkebun — langsung dari Kampus IPB
+            varietas IPB, media tanam, dan peralatan berkebun langsung dari Kampus IPB
             Dramaga, Bogor. Pesan mudah lewat website atau WhatsApp.
           </motion.p>
 
