@@ -8,8 +8,10 @@ import {
   Sparkles,
   Sprout,
   Recycle,
-  FlaskConical,
-  Leaf,
+  MessageCircle,
+  Flower2,
+  TreeDeciduous,
+  Package,
   Wrench,
   Layers,
 } from 'lucide-react'
@@ -18,13 +20,18 @@ import { ProductCard } from '@/components/site/product-card'
 import { rp } from '@/lib/format'
 import type { Product } from '@/lib/types'
 
+// Kategori asli Botani Mart (sesuai katalog resmi)
 const USAGE_ICONS: Record<string, typeof Sprout> = {
-  Benih: Sprout,
-  Pupuk: FlaskConical,
-  'Pestisida Nabati': Leaf,
-  'Alat Pertanian': Wrench,
-  'Media Tanam': Layers,
+  'Bibit Tanaman Buah': Sprout,
+  'Tanaman Hias': Flower2,
+  Tabulampot: TreeDeciduous,
+  'Aneka Benih Sayuran': Package,
+  'Media Tanam & Pupuk': Layers,
+  'Peralatan Berkebun': Wrench,
 }
+
+// Nomor WhatsApp resmi Botani Mart IPB
+const WA_NUMBER = '6281110631132'
 
 export function DetailView({ slug }: { slug: string }) {
   const goCatalog = useAppStore((s) => s.goCatalog)
@@ -92,6 +99,12 @@ export function DetailView({ slug }: { slug: string }) {
   const { product: p, related } = data
   const UsageIcon = USAGE_ICONS[p.category] ?? Sprout
 
+  // Link pesan langsung ke WhatsApp resmi Botani Mart
+  const waText = encodeURIComponent(
+    `Halo Botani Mart! Saya tertarik dengan produk "${p.name}" (kategori: ${p.category}) yang ada di website. Apakah masih tersedia?`
+  )
+  const waUrl = `https://wa.me/${WA_NUMBER}?text=${waText}`
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
       <button
@@ -132,8 +145,12 @@ export function DetailView({ slug }: { slug: string }) {
           </h1>
 
           <div className="mt-4 flex items-baseline gap-2">
-            <span className="font-serif text-3xl font-semibold text-primary">{rp(p.price)}</span>
-            <span className="text-sm text-muted-foreground">/ {p.unit}</span>
+            <span className="font-serif text-3xl font-semibold text-primary">
+              {p.price > 0 ? rp(p.price) : 'Hubungi kami'}
+            </span>
+            <span className="text-sm text-muted-foreground">
+              {p.price > 0 ? `/ ${p.unit}` : '— pesan via WhatsApp'}
+            </span>
           </div>
 
           <p className="mt-5 text-base leading-relaxed text-foreground/90">{p.description}</p>
@@ -157,16 +174,25 @@ export function DetailView({ slug }: { slug: string }) {
           <div className="mt-7 rounded-2xl border border-border/60 bg-secondary/30 p-5">
             <div className="flex items-center gap-2">
               <Recycle className="h-4 w-4 text-primary" />
-              <h2 className="font-serif text-base font-semibold">Cara Penggunaan</h2>
+              <h2 className="font-serif text-base font-semibold">Tips Perawatan</h2>
             </div>
             <p className="mt-2 text-sm leading-relaxed text-foreground/90">{p.usage}</p>
           </div>
 
           {/* CTA */}
           <div className="mt-7 flex flex-wrap gap-3">
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-md transition-all hover:shadow-lg hover:brightness-95"
+            >
+              <MessageCircle className="h-4 w-4" />
+              {p.price > 0 ? 'Pesan via WhatsApp' : 'Tanya Harga via WhatsApp'}
+            </a>
             <button
               onClick={() => goChat()}
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-md transition-all hover:shadow-lg hover:brightness-95"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/40"
             >
               <Sparkles className="h-4 w-4" />
               Tanya Asisten AI

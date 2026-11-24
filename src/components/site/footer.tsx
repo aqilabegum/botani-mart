@@ -1,13 +1,52 @@
 'use client'
 
-import { Sprout, Mail, MapPin, Phone } from 'lucide-react'
+import {
+  Sprout,
+  Mail,
+  MapPin,
+  Phone,
+  MessageCircle,
+  Instagram,
+  Music2,
+  ShoppingBag,
+} from 'lucide-react'
 import { useAppStore } from '@/store/app-store'
+
+// Kontak & sosmed resmi Botani Mart IPB
+export const CONTACT = {
+  wa: 'https://wa.me/6281110631132',
+  waDisplay: '0811-1063-1132',
+  email: 'bisnis@apps.ipb.ac.id',
+  phone: '+62 251 8622642',
+  address: 'Jl. Raya Dramaga, Kampus IPB Dramaga, Bogor 16680',
+  maps: 'https://share.google/Tc86vksGh7pPZNuMX',
+  instagram: 'https://www.instagram.com/botanimartipb/',
+  tiktok: 'https://www.tiktok.com/@botanimart',
+  shopee: 'https://shopee.co.id/ipb_mart',
+}
+
+// Kategori asli sesuai katalog Botani Mart
+export const REAL_CATEGORIES = [
+  'Bibit Tanaman Buah',
+  'Tanaman Hias',
+  'Tabulampot',
+  'Aneka Benih Sayuran',
+  'Media Tanam & Pupuk',
+  'Peralatan Berkebun',
+]
 
 export function Footer() {
   const goHome = useAppStore((s) => s.goHome)
   const goCatalog = useAppStore((s) => s.goCatalog)
   const goAbout = useAppStore((s) => s.goAbout)
   const goChat = useAppStore((s) => s.goChat)
+
+  const socials = [
+    { label: 'WhatsApp', href: CONTACT.wa, Icon: MessageCircle },
+    { label: 'Instagram', href: CONTACT.instagram, Icon: Instagram },
+    { label: 'TikTok', href: CONTACT.tiktok, Icon: Music2 },
+    { label: 'Shopee', href: CONTACT.shopee, Icon: ShoppingBag },
+  ]
 
   return (
     <footer className="mt-auto border-t border-border/60 bg-secondary/40">
@@ -21,20 +60,55 @@ export function Footer() {
               </span>
               <span className="font-serif text-xl font-semibold">Botani Mart</span>
             </div>
-            <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-              Platform informasi & katalog produk pertanian. Membantu petani, mahasiswa, dan
-              pehobi tanaman menemukan produk tepat dan memahami cara pakainya.
+            <p className="mt-2 text-sm font-medium text-primary">
+              The One Stop Garden Shop — Green-ing Your Life
+            </p>
+            <p className="mt-3 max-w-sm text-sm text-muted-foreground">
+              Unit bisnis retail agribisnis di bawah Direktorat Pengelola Usaha Kampus (DPUK)
+              IPB University. Pusat kebutuhan tanaman dan perlengkapan berkebun di Kampus IPB
+              Dramaga, Bogor.
             </p>
             <div className="mt-5 flex flex-col gap-2 text-sm text-muted-foreground">
+              <a
+                href={CONTACT.wa}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 hover:text-primary"
+              >
+                <MessageCircle className="h-4 w-4 text-primary" /> WhatsApp {CONTACT.waDisplay}
+              </a>
+              <a
+                href={`mailto:${CONTACT.email}`}
+                className="inline-flex items-center gap-2 hover:text-primary"
+              >
+                <Mail className="h-4 w-4 text-primary" /> {CONTACT.email}
+              </a>
               <span className="inline-flex items-center gap-2">
-                <Mail className="h-4 w-4 text-primary" /> halo@botanimart.id
+                <Phone className="h-4 w-4 text-primary" /> {CONTACT.phone}
               </span>
-              <span className="inline-flex items-center gap-2">
-                <Phone className="h-4 w-4 text-primary" /> +62 812 0000 0000
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-primary" /> Yogyakarta, Indonesia
-              </span>
+              <a
+                href={CONTACT.maps}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 hover:text-primary"
+              >
+                <MapPin className="h-4 w-4 text-primary" /> {CONTACT.address}
+              </a>
+            </div>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {socials.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  title={label}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/60 bg-background text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -64,6 +138,16 @@ export function Footer() {
                   Asisten AI
                 </button>
               </li>
+              <li>
+                <a
+                  href={CONTACT.wa}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary"
+                >
+                  Pesan via WhatsApp
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -73,25 +157,23 @@ export function Footer() {
               Kategori
             </h3>
             <ul className="mt-4 space-y-2 text-sm">
-              {['Benih', 'Pupuk', 'Pestisida Nabati', 'Alat Pertanian', 'Media Tanam'].map(
-                (c) => (
-                  <li key={c}>
-                    <button
-                      onClick={() => goCatalog({ category: c })}
-                      className="text-left text-muted-foreground hover:text-primary"
-                    >
-                      {c}
-                    </button>
-                  </li>
-                )
-              )}
+              {REAL_CATEGORIES.map((c) => (
+                <li key={c}>
+                  <button
+                    onClick={() => goCatalog({ category: c })}
+                    className="text-left text-muted-foreground hover:text-primary"
+                  >
+                    {c}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border/60 pt-6 text-xs text-muted-foreground sm:flex-row">
-          <p>© {new Date().getFullYear()} Botani Mart — Informasi & katalog produk pertanian.</p>
-          <p>Dibuat dengan Next.js, Prisma, Supabase, & Vercel.</p>
+          <p>© {new Date().getFullYear()} Botani Mart — Unit Bisnis DPUK IPB University.</p>
+          <p>Buka Senin-Minggu, 08.00-16.00 WIB.</p>
         </div>
       </div>
     </footer>

@@ -17,32 +17,36 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Botani Mart — Katalog & Informasi Produk Pertanian",
+  title: "Botani Mart IPB — The One Stop Garden Shop",
   description:
-    "Temukan benih, pupuk, pestisida nabati, dan alat pertanian lengkap dengan informasi penggunaannya. Asisten AI siap bantu rekomendasi.",
+    "Katalog & toko tanaman resmi Botani Mart IPB University: bibit tanaman buah, tanaman hias, tabulampot, aneka benih sayuran & varietas IPB, media tanam, pupuk, dan peralatan berkebun. Buka setiap hari 08.00-16.00 WIB di Kampus IPB Dramaga, Bogor.",
   keywords: [
     "Botani Mart",
-    "pertanian",
-    "benih",
+    "Botani Mart IPB",
+    "tanaman hias",
+    "bibit tanaman buah",
+    "tabulampot",
+    "benih varietas IPB",
+    "media tanam",
     "pupuk",
-    "pestisida nabati",
-    "alat pertanian",
-    "katalog produk",
-    "asisten AI pertanian",
+    "peralatan berkebun",
+    "urban farming",
+    "IPB University",
+    "Bogor",
   ],
-  authors: [{ name: "Botani Mart" }],
+  authors: [{ name: "Botani Mart — DPUK IPB University" }],
   openGraph: {
-    title: "Botani Mart — Katalog Produk Pertanian",
+    title: "Botani Mart IPB — The One Stop Garden Shop",
     description:
-      "Semua kebutuhan pertanian dalam satu tempat. Benih, pupuk, pestisida nabati, alat, & media tanam.",
+      "Koleksi tanaman pilihan, bibit unggul, benih varietas IPB, media tanam, dan peralatan berkebun. Langsung dari Kampus IPB Dramaga, Bogor.",
     siteName: "Botani Mart",
     type: "website",
     locale: "id_ID",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Botani Mart",
-    description: "Katalog & informasi produk pertanian.",
+    title: "Botani Mart IPB — The One Stop Garden Shop",
+    description: "Katalog & toko tanaman resmi Botani Mart IPB University.",
   },
 };
 

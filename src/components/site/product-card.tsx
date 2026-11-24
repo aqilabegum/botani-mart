@@ -37,8 +37,14 @@ export function ProductCard({ p, index = 0 }: { p: Product; index?: number }) {
         <p className="text-sm text-muted-foreground line-clamp-2">{p.short}</p>
         <div className="mt-auto flex items-end justify-between pt-2">
           <div>
-            <p className="font-serif text-lg font-semibold text-primary">{rp(p.price)}</p>
-            <p className="text-xs text-muted-foreground">/ {p.unit}</p>
+            {p.price > 0 ? (
+              <>
+                <p className="font-serif text-lg font-semibold text-primary">{rp(p.price)}</p>
+                <p className="text-xs text-muted-foreground">/ {p.unit}</p>
+              </>
+            ) : (
+              <p className="font-serif text-lg font-semibold text-primary">Hubungi kami</p>
+            )}
           </div>
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-all group-hover:bg-primary group-hover:text-primary-foreground">
             <ArrowRight className="h-4 w-4" />

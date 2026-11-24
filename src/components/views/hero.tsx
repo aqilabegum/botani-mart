@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Sparkles, Leaf, Recycle, Sprout } from 'lucide-react'
+import { ArrowRight, Sparkles, GraduationCap, Clock, Sprout } from 'lucide-react'
 import { useAppStore } from '@/store/app-store'
 
 export function Hero() {
@@ -25,7 +25,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 rounded-full bg-primary-foreground/15 px-3 py-1 text-xs font-medium uppercase tracking-wider backdrop-blur"
           >
             <Sparkles className="h-3.5 w-3.5" />
-            Katalog Pertanian Indonesia
+            The One Stop Garden Shop
           </motion.span>
 
           <motion.h1
@@ -34,7 +34,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.08 }}
             className="mt-5 font-serif text-4xl font-semibold leading-[1.1] tracking-tight text-balance sm:text-5xl md:text-6xl"
           >
-            Semua kebutuhan pertanian, dalam satu tempat.
+            Green-ing your life, semua kebutuhan tanamanmu ada di sini.
           </motion.h1>
 
           <motion.p
@@ -43,8 +43,9 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.16 }}
             className="mx-auto mt-5 max-w-xl text-base text-primary-foreground/85 md:mx-0 md:text-lg"
           >
-            Temukan benih unggul, pupuk, pestisida nabati, dan alat pertanian lengkap dengan
-            informasi penggunaannya. Didukung asisten AI untuk rekomendasi tepat.
+            Koleksi tanaman pilihan, bibit tanaman buah, tanaman hias, tabulampot, benih
+            varietas IPB, media tanam, dan peralatan berkebun — langsung dari Kampus IPB
+            Dramaga, Bogor. Pesan mudah lewat website atau WhatsApp.
           </motion.p>
 
           <motion.div
@@ -77,13 +78,13 @@ export function Hero() {
             className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 justify-center text-sm text-primary-foreground/80 md:justify-start"
           >
             <span className="inline-flex items-center gap-2">
-              <Sprout className="h-4 w-4" /> 9+ Produk Terkurasi
+              <Sprout className="h-4 w-4" /> 100+ Produk Asli Katalog
             </span>
             <span className="inline-flex items-center gap-2">
-              <Leaf className="h-4 w-4" /> Ramah Lingkungan
+              <GraduationCap className="h-4 w-4" /> Dikelola DPUK IPB University
             </span>
             <span className="inline-flex items-center gap-2">
-              <Recycle className="h-4 w-4" /> Edukasi Penggunaan
+              <Clock className="h-4 w-4" /> Buka Setiap Hari 08.00-16.00 WIB
             </span>
           </motion.div>
         </div>
@@ -96,16 +97,16 @@ export function Hero() {
           className="relative hidden h-[400px] md:block"
         >
           <div className="absolute right-0 top-4 flex h-56 w-56 items-center justify-center rounded-3xl bg-primary-foreground/15 text-8xl backdrop-blur-sm">
-            🌱
+            🌿
           </div>
           <div className="absolute left-0 top-32 flex h-44 w-44 items-center justify-center rounded-3xl bg-accent/25 text-7xl backdrop-blur-sm">
-            🌶️
+            🪴
           </div>
           <div className="absolute bottom-0 right-12 flex h-40 w-40 items-center justify-center rounded-3xl bg-primary-foreground/15 text-6xl backdrop-blur-sm">
-            🥥
+            🍊
           </div>
           <div className="absolute bottom-12 left-10 flex h-32 w-32 items-center justify-center rounded-2xl bg-accent/20 text-5xl backdrop-blur-sm">
-            🧪
+            🧺
           </div>
         </motion.div>
       </div>

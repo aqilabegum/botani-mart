@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Sparkles, ShieldCheck, Truck, HeartHandshake } from 'lucide-react'
+import { ArrowRight, Sparkles, ShieldCheck, MessageCircle, HeartHandshake } from 'lucide-react'
 import { Hero } from '@/components/views/hero'
 import { ProductCard } from '@/components/site/product-card'
 import { CategoryIcon, CATEGORY_GRADIENTS } from '@/components/site/category-icon'
@@ -51,7 +51,8 @@ export function HomeView() {
                 Kategori Produk
               </h2>
               <p className="mt-2 max-w-xl text-muted-foreground">
-                Lima kategori utama untuk segala kebutuhan pertanian kamu.
+                Enam kategori asli Botani Mart: dari bibit buah dan tanaman hias hingga
+                peralatan berkebun.
               </p>
             </div>
             <button
@@ -63,7 +64,7 @@ export function HomeView() {
             </button>
           </div>
 
-          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
             {cats.map((c, i) => (
               <motion.button
                 key={c.name}
@@ -101,7 +102,7 @@ export function HomeView() {
                 Produk Pilihan
               </h2>
               <p className="mt-2 max-w-xl text-muted-foreground">
-                Beberapa produk favorit untuk memulai kebun kamu.
+                Beberapa produk favorit untuk memulai kebun hijau kamu.
               </p>
             </div>
             <button
@@ -126,19 +127,46 @@ export function HomeView() {
         </div>
       </section>
 
+      {/* Pesan via WhatsApp CTA */}
+      <section className="border-b border-border/60 bg-secondary/40 py-16 sm:py-20">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 text-center sm:px-6">
+          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
+            <MessageCircle className="h-6 w-6" />
+          </span>
+          <div>
+            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              Suka produknya? Pesan langsung via WhatsApp.
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
+              Setiap produk di katalog punya tombol pesan yang langsung terhubung ke WhatsApp
+              resmi Botani Mart (0811-1063-1132). Tim kami siap bantu ketersediaan dan harga.
+            </p>
+          </div>
+          <a
+            href="https://wa.me/6281110631132"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-all hover:shadow-xl hover:brightness-95"
+          >
+            <MessageCircle className="h-4 w-4" />
+            Chat Botani Mart
+          </a>
+        </div>
+      </section>
+
       {/* Asisten AI CTA */}
-      <section className="border-y border-border/60 bg-secondary/40 py-16 sm:py-20">
+      <section className="py-16 sm:py-20">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 text-center sm:px-6">
           <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
             <Sparkles className="h-6 w-6" />
           </span>
           <div>
             <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-              Bingung pilih produk? Tanya Asisten AI.
+              Bingung pilih tanaman? Tanya Asisten AI.
             </h2>
             <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
-              Asisten AI Botani Mart siap bantu merekomendasikan produk dan menjelaskan cara
-              penggunaannya untuk kondisi lahan kamu.
+              Asisten AI Botani Mart siap bantu merekomendasikan tanaman dan menjelaskan tips
+              perawatan sesuai kebutuhan kamu.
             </p>
           </div>
           <button
@@ -152,24 +180,24 @@ export function HomeView() {
       </section>
 
       {/* Value props */}
-      <section className="py-16 sm:py-20">
+      <section className="border-t border-border/60 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="grid gap-6 md:grid-cols-3">
             {[
               {
                 icon: ShieldCheck,
-                title: 'Terpercaya & Informatif',
-                desc: 'Setiap produk dilengkapi manfaat dan cara penggunaan yang jelas.',
+                title: 'Resmi & Terpercaya',
+                desc: 'Unit bisnis retail agribisnis di bawah DPUK IPB University, aktif sejak 2018.',
               },
               {
-                icon: Truck,
-                title: 'Kurasi Lengkap',
-                desc: 'Benih, pupuk, pestisida nabati, alat, dan media tanam dalam satu katalog.',
+                icon: MessageCircle,
+                title: 'Katalog Lengkap',
+                desc: 'Bibit buah, tanaman hias, tabulampot, benih varietas IPB, media tanam & pupuk, hingga peralatan berkebun.',
               },
               {
                 icon: HeartHandshake,
                 title: 'Untuk Semua',
-                desc: 'Petani, mahasiswa pertanian, hingga pehobi tanaman urban.',
+                desc: 'Pecinta tanaman, pehobi urban farming, mahasiswa, hingga masyarakat umum.',
               },
             ].map((v, i) => (
               <motion.div
