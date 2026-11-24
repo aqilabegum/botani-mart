@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/site/theme-provider";
@@ -10,13 +10,15 @@ const inter = Inter({
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
+  icons: { icon: "/logo-ipb.png" },
   title: "Botani Mart IPB — The One Stop Garden Shop",
   description:
     "Katalog & toko tanaman resmi Botani Mart IPB University: bibit tanaman buah, tanaman hias, tabulampot, aneka benih sayuran & varietas IPB, media tanam, pupuk, dan peralatan berkebun. Buka setiap hari 08.00-16.00 WIB di Kampus IPB Dramaga, Bogor.",
@@ -58,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${inter.variable} ${poppins.variable} font-sans antialiased bg-background text-foreground`}
       >
         <ThemeProvider
           attribute="class"

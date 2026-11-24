@@ -72,7 +72,7 @@ export function HomeView() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: Math.min(i * 0.06, 0.4) }}
                 onClick={() => goCatalog({ category: c.name })}
-                className={`group relative flex flex-col items-start gap-3 overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br p-5 text-left shadow-sm transition-all hover:-translate-y-1 hover:shadow-md ${
+                className={`group relative flex flex-col items-start gap-3 overflow-hidden rounded-lg border border-border/60 bg-gradient-to-br p-5 text-left shadow-sm transition-all hover:-translate-y-1 hover:shadow-md ${
                   CATEGORY_GRADIENTS[c.name] ?? 'from-secondary to-secondary/40'
                 }`}
               >
@@ -119,7 +119,7 @@ export function HomeView() {
               ? Array.from({ length: 4 }).map((_, i) => (
                   <div
                     key={i}
-                    className="h-64 animate-pulse rounded-2xl border border-border/60 bg-secondary/40"
+                    className="h-64 animate-pulse rounded-lg border border-border/60 bg-secondary/40"
                   />
                 ))
               : items.map((p, i) => <ProductCard key={p.slug} p={p} index={i} />)}
@@ -130,7 +130,7 @@ export function HomeView() {
       {/* Pesan via WhatsApp CTA */}
       <section className="border-b border-border/60 bg-secondary/40 py-16 sm:py-20">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 text-center sm:px-6">
-          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
+          <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-md">
             <MessageCircle className="h-6 w-6" />
           </span>
           <div>
@@ -146,7 +146,7 @@ export function HomeView() {
             href="https://wa.me/6281110631132"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-all hover:shadow-xl hover:brightness-95"
+            className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-all hover:shadow-xl hover:brightness-95"
           >
             <MessageCircle className="h-4 w-4" />
             Chat Botani Mart
@@ -157,7 +157,7 @@ export function HomeView() {
       {/* Asisten AI CTA */}
       <section className="py-16 sm:py-20">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 text-center sm:px-6">
-          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
+          <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-md">
             <Sparkles className="h-6 w-6" />
           </span>
           <div>
@@ -171,7 +171,7 @@ export function HomeView() {
           </div>
           <button
             onClick={() => goChat()}
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-all hover:shadow-xl hover:brightness-95"
+            className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-all hover:shadow-xl hover:brightness-95"
           >
             <Sparkles className="h-4 w-4" />
             Mulai Tanya Asisten
@@ -206,7 +206,7 @@ export function HomeView() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm"
+                className="rounded-lg border border-border/60 bg-card p-6 shadow-sm"
               >
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary text-primary">
                   <v.icon className="h-5 w-5" />

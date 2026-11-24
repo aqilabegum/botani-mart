@@ -96,7 +96,7 @@ export function ChatView() {
     <div className="mx-auto flex max-w-3xl flex-col px-4 py-8 sm:px-6 sm:py-10">
       {/* Header */}
       <div className="mb-6 flex items-center gap-3">
-        <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-md">
+        <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-md">
           <Sparkles className="h-6 w-6" />
         </span>
         <div>
@@ -110,7 +110,7 @@ export function ChatView() {
       </div>
 
       {/* Messages */}
-      <div className="scroll-organic flex h-[55vh] min-h-[360px] flex-col gap-4 overflow-y-auto rounded-3xl border border-border/60 bg-card p-4 shadow-sm sm:p-6">
+      <div className="scroll-organic flex h-[55vh] min-h-[360px] flex-col gap-4 overflow-y-auto rounded-xl border border-border/60 bg-card p-4 shadow-sm sm:p-6">
         <AnimatePresence initial={false}>
           {msgs.map((m) => (
             <motion.div
@@ -121,7 +121,7 @@ export function ChatView() {
               className={`flex gap-3 ${m.role === 'user' ? 'flex-row-reverse' : ''}`}
             >
               <span
-                className={`mt-0.5 flex h-8 w-8 flex-none items-center justify-center rounded-full ${
+                className={`mt-0.5 flex h-8 w-8 flex-none items-center justify-center rounded-lg ${
                   m.role === 'user'
                     ? 'bg-accent text-accent-foreground'
                     : 'bg-primary text-primary-foreground'
@@ -131,7 +131,7 @@ export function ChatView() {
               </span>
               <div className={`max-w-[85%] ${m.role === 'user' ? 'text-right' : ''}`}>
                 <div
-                  className={`inline-block rounded-2xl px-4 py-2.5 text-left text-sm leading-relaxed ${
+                  className={`inline-block rounded-lg px-4 py-2.5 text-left text-sm leading-relaxed ${
                     m.role === 'user'
                       ? 'bg-accent text-accent-foreground'
                       : 'bg-secondary text-foreground'
@@ -176,10 +176,10 @@ export function ChatView() {
 
         {busy && (
           <div className="flex gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Bot className="h-4 w-4" />
             </span>
-            <div className="inline-flex items-center gap-2 rounded-2xl bg-secondary px-4 py-2.5 text-sm text-muted-foreground">
+            <div className="inline-flex items-center gap-2 rounded-lg bg-secondary px-4 py-2.5 text-sm text-muted-foreground">
               <Loader2 className="h-3.5 w-3.5 animate-spin" />
               Mengetik…
             </div>
@@ -195,7 +195,7 @@ export function ChatView() {
             key={t}
             onClick={() => send(t)}
             disabled={busy}
-            className="rounded-full border border-border/60 bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground disabled:opacity-50"
+            className="rounded-md border border-border/60 bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground disabled:opacity-50"
           >
             {t}
           </button>

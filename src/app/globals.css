@@ -7,7 +7,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
+  --font-serif: var(--font-poppins);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -43,79 +43,79 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Earthy Organic — Light (default) */
+/* IPB University — Light (default) */
 :root {
-  --radius: 0.75rem;
+  --radius: 0.5rem;
   /* Surfaces */
-  --background: oklch(0.985 0.012 95);        /* warm cream */
-  --foreground: oklch(0.24 0.03 150);          /* deep forest text */
-  --card: oklch(0.998 0.006 95);               /* near-white cream */
-  --card-foreground: oklch(0.24 0.03 150);
-  --popover: oklch(0.998 0.006 95);
-  --popover-foreground: oklch(0.24 0.03 150);
-  /* Brand */
-  --primary: oklch(0.45 0.09 150);             /* forest green */
-  --primary-foreground: oklch(0.985 0.012 95);
-  --secondary: oklch(0.93 0.03 130);           /* sage light */
-  --secondary-foreground: oklch(0.30 0.05 150);
-  --muted: oklch(0.95 0.018 100);
-  --muted-foreground: oklch(0.50 0.03 120);
-  --accent: oklch(0.66 0.13 45);               /* terracotta clay */
-  --accent-foreground: oklch(0.18 0.03 45);
+  --background: #ffffff;
+  --foreground: #14163a;
+  --card: #ffffff;
+  --card-foreground: #14163a;
+  --popover: #ffffff;
+  --popover-foreground: #14163a;
+  /* Brand: IPB blue (dari logo) */
+  --primary: #0a0a8c;
+  --primary-foreground: #ffffff;
+  --secondary: #e9ecf9;
+  --secondary-foreground: #0a0a8c;
+  --muted: #f3f5fb;
+  --muted-foreground: #5b617d;
+  --accent: #f2a900;                           /* emas IPB */
+  --accent-foreground: #14163a;
   --destructive: oklch(0.58 0.22 25);
-  --border: oklch(0.90 0.025 95);
-  --input: oklch(0.90 0.025 95);
-  --ring: oklch(0.55 0.08 150);
+  --border: #dde1ef;
+  --input: #dde1ef;
+  --ring: #3f3fd1;
   /* Charts */
-  --chart-1: oklch(0.55 0.11 150);             /* forest */
-  --chart-2: oklch(0.68 0.13 130);             /* sage */
-  --chart-3: oklch(0.72 0.12 85);              /* olive */
-  --chart-4: oklch(0.66 0.13 45);              /* clay */
-  --chart-5: oklch(0.80 0.10 60);              /* wheat */
+  --chart-1: #0a0a8c;
+  --chart-2: #3f6fd9;
+  --chart-3: #f2a900;
+  --chart-4: #4aa3c7;
+  --chart-5: #8a93c9;
   /* Sidebar */
-  --sidebar: oklch(0.97 0.015 95);
-  --sidebar-foreground: oklch(0.24 0.03 150);
-  --sidebar-primary: oklch(0.45 0.09 150);
-  --sidebar-primary-foreground: oklch(0.985 0.012 95);
-  --sidebar-accent: oklch(0.93 0.03 130);
-  --sidebar-accent-foreground: oklch(0.30 0.05 150);
-  --sidebar-border: oklch(0.90 0.025 95);
-  --sidebar-ring: oklch(0.55 0.08 150);
+  --sidebar: #f3f5fb;
+  --sidebar-foreground: #14163a;
+  --sidebar-primary: #0a0a8c;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e9ecf9;
+  --sidebar-accent-foreground: #0a0a8c;
+  --sidebar-border: #dde1ef;
+  --sidebar-ring: #3f3fd1;
 }
 
-/* Earthy Organic — Dark */
+/* IPB University — Dark */
 .dark {
-  --background: oklch(0.20 0.022 150);          /* deep forest night */
-  --foreground: oklch(0.94 0.018 95);
-  --card: oklch(0.245 0.025 150);
-  --card-foreground: oklch(0.94 0.018 95);
-  --popover: oklch(0.245 0.025 150);
-  --popover-foreground: oklch(0.94 0.018 95);
-  --primary: oklch(0.72 0.13 150);             /* bright sage in dark */
-  --primary-foreground: oklch(0.18 0.03 150);
-  --secondary: oklch(0.30 0.04 140);
-  --secondary-foreground: oklch(0.94 0.018 95);
-  --muted: oklch(0.28 0.03 140);
-  --muted-foreground: oklch(0.72 0.025 100);
-  --accent: oklch(0.72 0.14 45);               /* clay in dark */
-  --accent-foreground: oklch(0.15 0.02 45);
+  --background: #0a0c26;
+  --foreground: #eef0fb;
+  --card: #11143a;
+  --card-foreground: #eef0fb;
+  --popover: #11143a;
+  --popover-foreground: #eef0fb;
+  --primary: #9aa4ff;
+  --primary-foreground: #0a0c26;
+  --secondary: #1c2054;
+  --secondary-foreground: #eef0fb;
+  --muted: #181c48;
+  --muted-foreground: #a3a9cf;
+  --accent: #f5b82e;
+  --accent-foreground: #0a0c26;
   --destructive: oklch(0.70 0.20 22);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.55 0.08 150);
-  --chart-1: oklch(0.72 0.13 150);
-  --chart-2: oklch(0.75 0.12 130);
-  --chart-3: oklch(0.78 0.11 85);
-  --chart-4: oklch(0.72 0.14 45);
-  --chart-5: oklch(0.82 0.10 60);
-  --sidebar: oklch(0.245 0.025 150);
-  --sidebar-foreground: oklch(0.94 0.018 95);
-  --sidebar-primary: oklch(0.72 0.13 150);
-  --sidebar-primary-foreground: oklch(0.18 0.03 150);
-  --sidebar-accent: oklch(0.30 0.04 140);
-  --sidebar-accent-foreground: oklch(0.94 0.018 95);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.55 0.08 150);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: #6f78f0;
+  --chart-1: #9aa4ff;
+  --chart-2: #6f9bff;
+  --chart-3: #f5b82e;
+  --chart-4: #6cc3e6;
+  --chart-5: #b3b9e6;
+  --sidebar: #11143a;
+  --sidebar-foreground: #eef0fb;
+  --sidebar-primary: #9aa4ff;
+  --sidebar-primary-foreground: #0a0c26;
+  --sidebar-accent: #1c2054;
+  --sidebar-accent-foreground: #eef0fb;
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: #6f78f0;
 }
 
 @layer base {
@@ -141,11 +141,11 @@
     text-wrap: balance;
   }
   .bg-grain {
-    background-image: radial-gradient(oklch(0.45 0.09 150 / 0.04) 1px, transparent 1px);
+    background-image: radial-gradient(rgb(10 10 140 / 0.05) 1px, transparent 1px);
     background-size: 14px 14px;
   }
   .bg-grain-clay {
-    background-image: radial-gradient(oklch(0.66 0.13 45 / 0.06) 1px, transparent 1px);
+    background-image: radial-gradient(rgb(255 255 255 / 0.08) 1px, transparent 1px);
     background-size: 14px 14px;
   }
   /* Custom scrollbar for chat & long lists */
@@ -157,10 +157,10 @@
     background: transparent;
   }
   .scroll-organic::-webkit-scrollbar-thumb {
-    background: oklch(0.55 0.08 150 / 0.3);
+    background: rgb(10 10 140 / 0.3);
     border-radius: 9999px;
   }
   .scroll-organic::-webkit-scrollbar-thumb:hover {
-    background: oklch(0.55 0.08 150 / 0.5);
+    background: rgb(10 10 140 / 0.5);
   }
 }

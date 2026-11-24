@@ -81,7 +81,7 @@ export function AboutView() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm"
+          className="rounded-lg border border-border/60 bg-card p-6 shadow-sm"
         >
           <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary text-primary">
             <Target className="h-5 w-5" />
@@ -98,7 +98,7 @@ export function AboutView() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.08 }}
-          className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm"
+          className="rounded-lg border border-border/60 bg-card p-6 shadow-sm"
         >
           <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary text-primary">
             <Compass className="h-5 w-5" />
@@ -123,7 +123,7 @@ export function AboutView() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm"
+              className="rounded-lg border border-border/60 bg-card p-6 shadow-sm"
             >
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary text-primary">
                 <v.icon className="h-5 w-5" />
@@ -141,13 +141,13 @@ export function AboutView() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
-        className="mt-12 rounded-2xl bg-gradient-to-br from-primary to-primary/80 p-8 text-primary-foreground shadow-md"
+        className="mt-12 rounded-lg border-b-4 border-accent bg-gradient-to-br from-[#06066e] via-[#0a0a8c] to-[#1c2db5] p-8 text-white shadow-md"
       >
         <div className="flex items-center gap-3">
           <Users className="h-6 w-6" />
           <h2 className="font-serif text-xl font-semibold">Untuk Siapa?</h2>
         </div>
-        <p className="mt-3 text-sm leading-relaxed text-primary-foreground/90">
+        <p className="mt-3 text-sm leading-relaxed text-white/90">
           Botani Mart melayani pecinta tanaman, pehobi urban farming yang berkebun di lahan
           sempit, mahasiswa dan akademisi IPB, hingga masyarakat umum yang ingin menghadirkan
           hijau di rumahnya. Semua bisa menemukan produk dan info perawatan tanaman dalam satu
@@ -156,13 +156,13 @@ export function AboutView() {
         <div className="mt-6 flex flex-wrap gap-3">
           <button
             onClick={goCatalog}
-            className="inline-flex items-center gap-2 rounded-full bg-primary-foreground px-5 py-2.5 text-sm font-semibold text-primary transition-all hover:brightness-95"
+            className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-2.5 text-sm font-semibold text-[#14163a] transition-all hover:brightness-95"
           >
             Jelajahi Katalog
           </button>
           <button
             onClick={goChat}
-            className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 bg-primary-foreground/10 px-5 py-2.5 text-sm font-semibold text-primary-foreground backdrop-blur transition-all hover:bg-primary-foreground/20"
+            className="inline-flex items-center gap-2 rounded-md border border-white/50 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur transition-all hover:bg-white/20"
           >
             <Sparkles className="h-4 w-4" /> Tanya Asisten AI
           </button>
@@ -175,7 +175,7 @@ export function AboutView() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
-        className="mt-12 rounded-2xl border border-border/60 bg-card p-8 shadow-sm"
+        className="mt-12 rounded-lg border border-border/60 bg-card p-8 shadow-sm"
       >
         <h2 className="font-serif text-2xl font-semibold tracking-tight">Kunjungi Kami</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -208,7 +208,7 @@ export function AboutView() {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-md transition-all hover:shadow-lg hover:brightness-95"
+            className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-md transition-all hover:shadow-lg hover:brightness-95"
           >
             <MessageCircle className="h-4 w-4" />
             Chat WhatsApp 0811-1063-1132
@@ -221,7 +221,7 @@ export function AboutView() {
               rel="noopener noreferrer"
               aria-label={label}
               title={label}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-background text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary"
             >
               <Icon className="h-4 w-4" />
             </a>
