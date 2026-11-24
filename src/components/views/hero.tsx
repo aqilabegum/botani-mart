@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowRight, Sparkles, GraduationCap, Clock, Sprout } from 'lucide-react'
 import { useAppStore } from '@/store/app-store'
@@ -89,24 +90,40 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Visual collage */}
+        {/* Visual collage: foto Botani Mart */}
         <motion.div
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative hidden h-[400px] md:block"
+          className="relative hidden h-[420px] md:block"
         >
-          <div className="absolute right-0 top-4 flex h-56 w-56 items-center justify-center rounded-lg bg-white/15 text-8xl backdrop-blur-sm">
-            🌿
+          <div className="absolute right-0 top-0 h-56 w-72 overflow-hidden rounded-lg border-2 border-white/40 shadow-2xl">
+            <Image
+              src="/botani/botani-area-tanaman.jpg"
+              alt="Area tanaman Botani Mart"
+              fill
+              priority
+              sizes="288px"
+              className="object-cover"
+            />
           </div>
-          <div className="absolute left-0 top-32 flex h-44 w-44 items-center justify-center rounded-lg bg-accent/30 text-7xl backdrop-blur-sm">
-            🪴
+          <div className="absolute left-0 top-28 h-52 w-60 overflow-hidden rounded-lg border-2 border-white/40 shadow-2xl">
+            <Image
+              src="/botani/botani-gedung-kaca.jpg"
+              alt="Gedung kaca Botani Mart"
+              fill
+              sizes="240px"
+              className="object-cover"
+            />
           </div>
-          <div className="absolute bottom-0 right-12 flex h-40 w-40 items-center justify-center rounded-lg bg-white/15 text-6xl backdrop-blur-sm">
-            🍊
-          </div>
-          <div className="absolute bottom-12 left-10 flex h-32 w-32 items-center justify-center rounded-lg bg-accent/20 text-5xl backdrop-blur-sm">
-            🧺
+          <div className="absolute bottom-0 right-10 h-48 w-64 overflow-hidden rounded-lg border-2 border-white/40 shadow-2xl">
+            <Image
+              src="/botani/botani-toko.jpg"
+              alt="Bagian dalam toko Botani Mart"
+              fill
+              sizes="256px"
+              className="object-cover"
+            />
           </div>
         </motion.div>
       </div>
