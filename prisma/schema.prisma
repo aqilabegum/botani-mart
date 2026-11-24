@@ -1,0 +1,40 @@
+// Botani Mart — Prisma schema
+// Works with SQLite (local preview) AND PostgreSQL (Supabase production).
+// To deploy on Supabase, change provider to "postgresql" and set DATABASE_URL
+// to your Supabase connection string. See deploy guide in /download.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // For Supabase production: provider = "postgresql"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  slug        String   @id
+  name        String
+  category    String
+  price       Int
+  unit        String
+  emoji       String
+  short       String
+  description String
+  benefits    String   // JSON-encoded array of strings, e.g. ["Daya kecambah tinggi", ...]
+  usage       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([price])
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  icon      String
+  blurb     String
+  createdAt DateTime @default(now())
+}
