@@ -67,7 +67,7 @@ export function DetailView({ slug }: { slug: string }) {
     return (
       <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
         <div className="grid gap-8 md:grid-cols-2">
-          <div className="h-80 animate-pulse rounded-3xl bg-secondary/40" />
+          <div className="h-80 animate-pulse rounded-xl bg-secondary/40" />
           <div className="space-y-4">
             <div className="h-6 w-24 animate-pulse rounded bg-secondary/40" />
             <div className="h-10 w-3/4 animate-pulse rounded bg-secondary/40" />
@@ -88,7 +88,7 @@ export function DetailView({ slug }: { slug: string }) {
         </p>
         <button
           onClick={goCatalog}
-          className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
+          className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
         >
           <ArrowLeft className="h-4 w-4" /> Kembali ke Katalog
         </button>
@@ -120,11 +120,11 @@ export function DetailView({ slug }: { slug: string }) {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4 }}
-          className="relative flex h-80 items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-br from-secondary to-secondary/40 shadow-sm md:h-[440px]"
+          className="relative flex h-80 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-secondary to-secondary/40 shadow-sm md:h-[440px]"
         >
           <div className="bg-grain absolute inset-0 opacity-50" />
           <span className="relative text-[10rem] md:text-[12rem]">{p.emoji}</span>
-          <span className="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-full bg-background/85 px-3 py-1.5 text-xs font-medium text-primary backdrop-blur">
+          <span className="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-md bg-background/85 px-3 py-1.5 text-xs font-medium text-primary backdrop-blur">
             <UsageIcon className="h-3.5 w-3.5" />
             {p.category}
           </span>
@@ -161,7 +161,7 @@ export function DetailView({ slug }: { slug: string }) {
             <ul className="mt-3 space-y-2">
               {p.benefits.map((b) => (
                 <li key={b} className="flex items-start gap-2.5 text-sm">
-                  <span className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-primary/15 text-primary">
+                  <span className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-lg bg-primary/15 text-primary">
                     <Check className="h-3 w-3" />
                   </span>
                   <span className="text-foreground/90">{b}</span>
@@ -171,7 +171,7 @@ export function DetailView({ slug }: { slug: string }) {
           </div>
 
           {/* Usage */}
-          <div className="mt-7 rounded-2xl border border-border/60 bg-secondary/30 p-5">
+          <div className="mt-7 rounded-lg border border-border/60 bg-secondary/30 p-5">
             <div className="flex items-center gap-2">
               <Recycle className="h-4 w-4 text-primary" />
               <h2 className="font-serif text-base font-semibold">Tips Perawatan</h2>
@@ -185,21 +185,21 @@ export function DetailView({ slug }: { slug: string }) {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-md transition-all hover:shadow-lg hover:brightness-95"
+              className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-md transition-all hover:shadow-lg hover:brightness-95"
             >
               <MessageCircle className="h-4 w-4" />
               {p.price > 0 ? 'Pesan via WhatsApp' : 'Tanya Harga via WhatsApp'}
             </a>
             <button
               onClick={() => goChat()}
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/40"
+              className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/40"
             >
               <Sparkles className="h-4 w-4" />
               Tanya Asisten AI
             </button>
             <button
               onClick={goCatalog}
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/40"
+              className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/40"
             >
               Lihat Produk Lain
             </button>

@@ -116,7 +116,7 @@ export function CatalogView() {
       <div className="mb-6 flex flex-wrap gap-2">
         <button
           onClick={() => setCatalogParam('category', '')}
-          className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+          className={`rounded-md border px-3 py-1.5 text-xs font-medium transition-colors ${
             !category
               ? 'border-primary bg-primary text-primary-foreground'
               : 'border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground'
@@ -128,7 +128,7 @@ export function CatalogView() {
           <button
             key={c.name}
             onClick={() => setCatalogParam('category', c.name)}
-            className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`rounded-md border px-3 py-1.5 text-xs font-medium transition-colors ${
               category === c.name
                 ? 'border-primary bg-primary text-primary-foreground'
                 : 'border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground'
@@ -164,7 +164,7 @@ export function CatalogView() {
           {Array.from({ length: 8 }).map((_, i) => (
             <div
               key={i}
-              className="h-64 animate-pulse rounded-2xl border border-border/60 bg-secondary/40"
+              className="h-64 animate-pulse rounded-lg border border-border/60 bg-secondary/40"
             />
           ))}
         </div>
@@ -172,7 +172,7 @@ export function CatalogView() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-border bg-card/50 py-20 text-center"
+          className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-border bg-card/50 py-20 text-center"
         >
           <Search className="h-10 w-10 text-muted-foreground/60" />
           <h3 className="font-serif text-xl font-semibold">Produk tidak ditemukan</h3>
