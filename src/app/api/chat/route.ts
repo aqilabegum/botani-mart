@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-import ZAI from 'z-ai-web-dev-sdk'
 import { findProducts } from '@/lib/data'
 import type { ChatMessage } from '@/lib/types'
 
@@ -10,6 +9,11 @@ type Body = {
   message: string
   history?: ChatMessage[]
 }
+
+// Konfigurasi Gemini API (diambil dari environment variable)
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || ''
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash'
+const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`
 
 // Build a compact product catalog as context for the LLM
 async function buildCatalogContext(): Promise<string> {
@@ -43,6 +47,67 @@ PENTING tentang rekomendasi produk:
 KATALOG PRODUK BOTANI MART:
 {CATALOG}`
 
+type GeminiPart = { text?: string }
+type GeminiResponse = {
+  candidates?: { content?: { parts?: GeminiPart[] }; finishReason?: string }[]
+  promptFeedback?: { blockReason?: string }
+  error?: { message?: string }
+}
+
+// Panggil Gemini API (REST, tanpa SDK tambahan).
+// History diawali pesan welcome dari assistant, sedangkan Gemini mewajibkan
+// turn pertama ber-role "user", jadi pesan assistant di awal dibuang.
+async function askGemini(system: string, history: ChatMessage[], message: string): Promise<string> {
+  const turns = [...history]
+  while (turns.length && turns[0].role !== 'user') turns.shift()
+
+  const contents = [
+    ...turns.map((h) => ({
+      role: h.role === 'user' ? 'user' : 'model',
+      parts: [{ text: h.content }],
+    })),
+    { role: 'user', parts: [{ text: message }] },
+  ]
+
+  const generationConfig: Record<string, unknown> = {
+    temperature: 0.7,
+    maxOutputTokens: 1024,
+  }
+  // Nonaktifkan "thinking" pada model Gemini 2.5 agar jawaban cepat & hemat token
+  if (/gemini-(2\.5|3)/.test(GEMINI_MODEL)) {
+    generationConfig.thinkingConfig = { thinkingBudget: 0 }
+  }
+
+  const res = await fetch(GEMINI_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-goog-api-key': GEMINI_API_KEY,
+    },
+    body: JSON.stringify({
+      systemInstruction: { parts: [{ text: system }] },
+      contents,
+      generationConfig,
+    }),
+    signal: AbortSignal.timeout(25_000),
+  })
+
+  const data = (await res.json().catch(() => ({}))) as GeminiResponse
+  if (!res.ok) {
+    throw new Error(`Gemini API ${res.status}: ${data.error?.message || res.statusText}`)
+  }
+
+  const text = (data.candidates?.[0]?.content?.parts || [])
+    .map((p) => p.text || '')
+    .join('')
+    .trim()
+  if (!text) {
+    const reason = data.candidates?.[0]?.finishReason || data.promptFeedback?.blockReason
+    throw new Error(`Gemini tidak mengembalikan jawaban${reason ? ` (${reason})` : ''}`)
+  }
+  return text
+}
+
 export async function POST(req: Request) {
   let body: Body
   try {
@@ -56,29 +121,26 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Pesan kosong' }, { status: 400 })
   }
 
+  if (!GEMINI_API_KEY) {
+    console.error('[chat] GEMINI_API_KEY belum di-set di environment variable')
+    return NextResponse.json(
+      {
+        reply:
+          'Maaf, asisten AI belum terkonfigurasi (GEMINI_API_KEY belum di-set). Sementara itu, kamu bisa menjelajahi katalog produk kami dulu ya.',
+        products: [],
+        placeholder: true,
+      },
+      { status: 200 }
+    )
+  }
+
   const history = Array.isArray(body.history) ? body.history.slice(-10) : []
 
   try {
     const catalog = await buildCatalogContext()
     const system = SYSTEM_PROMPT.replace('{CATALOG}', catalog)
 
-    const zai = await ZAI.create()
-    const completion = await zai.chat.completions.create({
-      messages: [
-        { role: 'assistant', content: system },
-        ...history.map((h) => ({
-          role: h.role === 'user' ? ('user' as const) : ('assistant' as const),
-          content: h.content,
-        })),
-        { role: 'user', content: message },
-      ],
-      thinking: { type: 'disabled' },
-      temperature: 0.7,
-    })
-
-    const reply =
-      completion.choices[0]?.message?.content ||
-      'Maaf, saya belum bisa menjawab saat ini. Coba pertanyaan lain ya.'
+    const reply = await askGemini(system, history, message)
 
     // Detect which catalog products are mentioned in the reply, return their slugs
     const all = await findProducts({})
