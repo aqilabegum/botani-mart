@@ -126,7 +126,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         reply:
-          'Maaf, asisten AI belum terkonfigurasi (GEMINI_API_KEY belum di-set). Sementara itu, kamu bisa menjelajahi katalog produk kami dulu ya.',
+          'Maaf, layanan asisten AI sedang tidak tersedia saat ini. Sementara itu, kamu bisa menjelajahi katalog produk kami dulu ya.',
         products: [],
         placeholder: true,
       },
@@ -153,15 +153,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ reply, products: mentioned, placeholder: false })
   } catch (err) {
     console.error('[chat] LLM error:', err)
-    // VERSI DEBUG: penyebab error ditampilkan agar mudah didiagnosis.
-    // Ganti kembali dengan route.ts versi bersih setelah masalah ketemu.
-    const detail = err instanceof Error ? err.message : String(err)
-    const keyFormat = /^AIza[A-Za-z0-9_-]{30,}$/.test(GEMINI_API_KEY)
-      ? 'format GEMINI_API_KEY: OK'
-      : 'format GEMINI_API_KEY: TIDAK NORMAL (harusnya diawali "AIza", panjang sekitar 39 karakter, tanpa spasi/tanda kutip)'
     return NextResponse.json(
       {
-        reply: `Maaf, asisten AI sedang mengalami gangguan teknis.\n\n[DEBUG] ${detail}\n[DEBUG] model dipakai: "${GEMINI_MODEL}" | ${keyFormat}`,
+        reply:
+          'Maaf, asisten AI sedang mengalami gangguan sementara. Silakan coba beberapa saat lagi atau jelajahi katalog produk kami secara langsung.',
         products: [],
         placeholder: true,
       },
