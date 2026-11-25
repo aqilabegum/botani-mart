@@ -1,7 +1,7 @@
-
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from typing import Literal
 
 from scripts.rag_pipeline import generate_answer
 
@@ -21,8 +21,14 @@ app.add_middleware(
 )
 
 
+class HistoryMessage(BaseModel):
+    role: Literal["user", "assistant"]
+    content: str
+
+
 class ChatRequest(BaseModel):
     question: str
+    history: list[HistoryMessage] = Field(default_factory=list)
 
 
 @app.get("/")
@@ -35,7 +41,13 @@ def home():
 @app.post("/chat")
 def chat(request: ChatRequest):
     try:
-        result = generate_answer(request.question)
+        result = generate_answer(
+            question=request.question,
+            history=[
+                item.model_dump()
+                for item in request.history
+            ]
+        )
 
         return {
             "question": request.question,

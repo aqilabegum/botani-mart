@@ -53,10 +53,26 @@ dilakukan.
 """
 
 
-def build_prompt(question, context):
+def build_prompt(question, context, history=None):
+
+    history_text = ""
+
+    if history:
+        history_text = "\n".join(
+            f"{item['role'].upper()}: {item['content']}"
+            for item in history
+        )
+    else:
+        history_text = "Belum ada riwayat percakapan."
 
     prompt = f"""
 {SYSTEM_PROMPT}
+
+==============================
+RIWAYAT PERCAKAPAN
+==============================
+
+{history_text}
 
 ==============================
 KONTEKS KNOWLEDGE BASE BOTANI MART
@@ -74,8 +90,12 @@ PERTANYAAN PENGGUNA
 INSTRUKSI
 ==============================
 
-Jawab pertanyaan pengguna berdasarkan konteks
-knowledge base Botani Mart dan aturan di atas.
+Jawab pertanyaan terbaru pengguna dengan
+mempertimbangkan riwayat percakapan dan konteks
+knowledge base Botani Mart.
+
+Tetap utamakan konteks knowledge base untuk
+informasi faktual mengenai produk.
 
 Jawaban:
 """

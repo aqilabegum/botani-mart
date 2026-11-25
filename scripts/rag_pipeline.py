@@ -1,4 +1,3 @@
-
 import os
 import time
 import chromadb
@@ -7,6 +6,7 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import errors
 from sentence_transformers import SentenceTransformer
+from pathlib import Path
 
 from scripts.context_assembly import build_context
 from scripts.prompt_template import build_prompt
@@ -33,8 +33,11 @@ embedding_model = SentenceTransformer(
 
 
 # 3. Menghubungkan ke ChromaDB
+BASE_DIR = Path(__file__).resolve().parent.parent
+DB_PATH = BASE_DIR / "vector_db"
+
 client_chroma = chromadb.PersistentClient(
-    path="vector_db"
+    path=str(DB_PATH)
 )
 
 collection = client_chroma.get_collection(
@@ -55,15 +58,50 @@ for metadata in all_data["metadatas"]:
 
 
 # 5. Fungsi utama RAG
-def generate_answer(question: str):
+def generate_answer(question: str, history=None):
 
     question = question.strip()
 
     if not question:
         raise ValueError("Pertanyaan tidak boleh kosong!")
 
-    question_lower = question.lower()
+    # Memahami konteks percakapan tanpa pemanggilan Gemini
+    history = history or []
 
+    follow_up_keywords = [
+        "nya",
+        "itu",
+        "tersebut",
+        "tadi",
+        "perawatannya",
+        "produk tersebut",
+        "produk itu"
+    ]
+
+    question_lower_original = question.lower()
+
+    is_follow_up = any(
+        keyword in question_lower_original
+        for keyword in follow_up_keywords
+    )
+
+    recent_user_messages = [
+        item["content"]
+        for item in history[-6:]
+        if item.get("role") == "user"
+    ]
+
+    if is_follow_up and recent_user_messages:
+        retrieval_question = (
+            "Konteks pertanyaan sebelumnya: "
+            + " ".join(recent_user_messages[-2:])
+            + "\nPertanyaan terbaru: "
+            + question
+        )
+    else:
+        retrieval_question = question
+
+    question_lower = retrieval_question.lower()
 
     # 5a. Mengidentifikasi jenis informasi
     chunk_type = None
@@ -94,9 +132,10 @@ def generate_answer(question: str):
             break
 
 
+    
     # 5c. Membuat embedding pertanyaan
     query_embedding = embedding_model.encode(
-        question,
+        retrieval_question,
         normalize_embeddings=True
     ).tolist()
 
@@ -172,7 +211,8 @@ def generate_answer(question: str):
     # 5i. Membuat prompt
     prompt = build_prompt(
         question=question,
-        context=context
+        context=context,
+        history=history
     )
 
 

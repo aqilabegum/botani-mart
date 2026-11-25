@@ -1,13 +1,15 @@
 import { NextResponse } from 'next/server'
 import { findProducts } from '@/lib/data'
-import type { ChatMessage } from '@/lib/types'
 
 export const runtime = 'nodejs'
-export const maxDuration = 30
+export const maxDuration = 60
 
 type Body = {
   message: string
-  history?: ChatMessage[]
+  history?: {
+    role: 'user' | 'assistant'
+    content: string
+  }[]
 }
 
 // Konfigurasi Gemini API (diambil dari environment variable)
@@ -110,53 +112,82 @@ async function askGemini(system: string, history: ChatMessage[], message: string
 
 export async function POST(req: Request) {
   let body: Body
+
   try {
     body = (await req.json()) as Body
   } catch {
-    return NextResponse.json({ error: 'Body tidak valid' }, { status: 400 })
-  }
-
-  const message = (body.message || '').trim()
-  if (!message) {
-    return NextResponse.json({ error: 'Pesan kosong' }, { status: 400 })
-  }
-
-  if (!GEMINI_API_KEY) {
-    console.error('[chat] GEMINI_API_KEY belum di-set di environment variable')
     return NextResponse.json(
-      {
-        reply:
-          'Maaf, layanan asisten AI sedang tidak tersedia saat ini. Sementara itu, kamu bisa menjelajahi katalog produk kami dulu ya.',
-        products: [],
-        placeholder: true,
-      },
-      { status: 200 }
+      { error: 'Body tidak valid' },
+      { status: 400 }
     )
   }
 
-  const history = Array.isArray(body.history) ? body.history.slice(-10) : []
+  const message = (body.message || '').trim()
+
+  if (!message) {
+    return NextResponse.json(
+      { error: 'Pesan kosong' },
+      { status: 400 }
+    )
+  }
+
+  const ragApiUrl =
+    process.env.RAG_API_URL || 'http://127.0.0.1:8000'
 
   try {
-    const catalog = await buildCatalogContext()
-    const system = SYSTEM_PROMPT.replace('{CATALOG}', catalog)
+    const ragResponse = await fetch(`${ragApiUrl}/chat`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        question: message,
+        history: body.history ?? [],
+      }),
+      cache: 'no-store',
+      signal: AbortSignal.timeout(90000),
+    })
 
-    const reply = await askGemini(system, history, message)
+    if (!ragResponse.ok) {
+      const errorText = await ragResponse.text()
+      throw new Error(
+        `RAG API ${ragResponse.status}: ${errorText}`
+      )
+    }
 
-    // Detect which catalog products are mentioned in the reply, return their slugs
+    const ragData = await ragResponse.json()
+    const reply = ragData.answer?.trim()
+
+    if (!reply) {
+      throw new Error('Jawaban dari RAG API kosong.')
+    }
+
+    // Mencocokkan produk yang disebutkan AI
+    // agar kartu produk website tetap bisa ditampilkan.
     const all = await findProducts({})
     const lower = reply.toLowerCase()
+
     const mentioned = all
-      .filter((p) => lower.includes(p.name.toLowerCase()) || lower.includes(p.slug.toLowerCase()))
+      .filter(
+        (p) =>
+          lower.includes(p.name.toLowerCase()) ||
+          lower.includes(p.slug.toLowerCase())
+      )
       .map((p) => p.slug)
       .slice(0, 3)
 
-    return NextResponse.json({ reply, products: mentioned, placeholder: false })
+    return NextResponse.json({
+      reply,
+      products: mentioned,
+      placeholder: false,
+    })
   } catch (err) {
-    console.error('[chat] LLM error:', err)
+    console.error('[chat] RAG API error:', err)
+
     return NextResponse.json(
       {
         reply:
-          'Maaf, asisten AI sedang mengalami gangguan sementara. Silakan coba beberapa saat lagi atau jelajahi katalog produk kami secara langsung.',
+          'Maaf, Asisten AI sedang tidak dapat dihubungi. Pastikan RAG backend FastAPI sedang berjalan.',
         products: [],
         placeholder: true,
       },
